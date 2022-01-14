@@ -8,16 +8,18 @@ class Basket {
   }
 
   getPriceOfBagel() {
-      const output = new Bagel();
-      return output.price
+    const output = new Bagel();
+    return output.price;
   }
 
   addBagel(bagelType, numOfBagels = 1) {
-    this.IDcounter++;
-    const id = this.IDcounter;
-    let bagelItem = new Bagel(id, bagelType);
     for (let i = 0; i < numOfBagels; i++) {
-      this.contents.push(bagelItem);
+      if (!this.basketIsFull()) {
+        this.IDcounter++;
+        const id = this.IDcounter;
+        let bagelItem = new Bagel(id, bagelType);
+        this.contents.push(bagelItem);
+      }
     }
     return this.contents;
   }
@@ -30,21 +32,21 @@ class Basket {
     }
     return "Bagel isn't in basket";
   }
-  getBagels() {
+  basketIsFull() {
     // console.log('\ncontents' + this.contents.length)
     // console.log('capacity' + this.capacity)
-    if (this.contents.length < this.capacity) {
-      return this.contents;
+    if (this.contents.length >= this.capacity) {
+      return "basket is full";
     }
-    return "basket is full";
+    return false;
   }
 
   getTotal() {
-      let total = 0
+    let total = 0;
     for (let i = 0; i < this.contents.length; i++) {
-       total += this.contents[i].price 
+      total += this.contents[i].price;
     }
-   return total
+    return total;
   }
 }
 

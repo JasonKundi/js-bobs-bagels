@@ -46,12 +46,24 @@ describe("Basket", () => {
   });
 
   it("When Basket is full", () => {
+    //set up
     const expected = "basket is full";
     basket.addBagel("blt", 4);
-    const result = basket.getBagels();
+
+    //verify
+    const result = basket.basketIsFull();
+
+    //execute
 
     expect(result).toEqual(expected);
   });
+
+  it("prevent adding bagels past basket capacity", () => {
+    const expected = 3
+    basket.addBagel("BGLO", 4)
+    const result = basket.contents.length
+    expect(result).toEqual(expected);
+});
 
   it("create basket with larger capacity", () => {
     const expected = true;
